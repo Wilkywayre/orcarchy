@@ -1,0 +1,34 @@
+{
+  "$schema": "https://raw.githubusercontent.com/stablyai/orca/main/docs/schemas/plugins/orca-plugin.v2.schema.json",
+  "manifestVersion": 2,
+  "execution": "trusted-worker",
+  "id": "orcarchy",
+  "name": "Orcarchy — Omarchy Sync (development preview)",
+  "version": "0.1.0",
+  "description": "Live Omarchy color synchronization. Requires the Orcarchy appearance-provider source extension; stock Orca is not supported yet. Python 3.11+ required.",
+  "author": { "name": "wilkywayre" },
+  "repository": "https://github.com/wilkywayre/orcarchy",
+  "license": "MIT",
+  "engines": { "orca": ">=1.4.249" },
+  "pluginApi": 1,
+  "main": "plugin/main.mjs",
+  "capabilities": [
+    { "kind": "appearance:write" },
+    { "kind": "settings:own" }
+  ],
+  "contributes": {
+    "commands": [
+      { "id": "orcarchy.sync", "title": "Orcarchy: Sync now" },
+      { "id": "orcarchy.disconnect", "title": "Orcarchy: Disconnect (keep current appearance)" }
+    ],
+    "statusBarItems": [
+      { "id": "sync", "text": "Orcarchy: starting", "icon": "refresh", "command": "orcarchy.sync" }
+    ],
+    "settings": [
+      { "key": "enabled", "title": "Automatic synchronization", "description": "Follow Omarchy on startup and while running. Disable to leave the current appearance unchanged.", "type": "boolean", "default": true },
+      { "key": "colors", "title": "Colors", "description": "Synchronize application, editor, and terminal colors through the experimental host API.", "type": "boolean", "default": true },
+      { "key": "fonts", "title": "Fonts (not available in this preview)", "description": "Requested by default; no font settings are changed until family-only host support is implemented.", "type": "boolean", "default": true },
+      { "key": "backgrounds", "title": "Backgrounds (not available in this preview)", "description": "Requested by default; no background or opacity settings are changed in this preview.", "type": "boolean", "default": true }
+    ]
+  }
+}
