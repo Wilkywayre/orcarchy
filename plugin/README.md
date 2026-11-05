@@ -6,6 +6,21 @@ Automatically follows Omarchy colors when approved in a compatible Orca host.
 does not work in stock Orca.** The experimental schema uses a 1.4.249 minimum;
 that number is not a claim that a stock 1.4.249 release includes this API.
 
+## Live preview
+
+![Orcarchy following Tokyo Night in the application and editor](https://raw.githubusercontent.com/Wilkywayre/orcarchy/main/images/tokyo-night-editor.png)
+
+| Gruvbox | Catppuccin Latte |
+| --- | --- |
+| ![Gruvbox existing terminal](https://raw.githubusercontent.com/Wilkywayre/orcarchy/main/images/gruvbox-terminal.png) | ![Catppuccin Latte same terminal](https://raw.githubusercontent.com/Wilkywayre/orcarchy/main/images/catppuccin-latte-terminal.png) |
+
+Real custom-host Electron captures from an isolated Linux profile. The same app,
+editor file, and terminal survived all three palette changes without restart.
+The test replaced a theme symlink under a disposable HOME, not the user's desktop
+theme. [Method and limits](https://github.com/Wilkywayre/orca/blob/0d526ee78ea87fb34d709bca7a9e0418d2d64ee3/README.md).
+
+Host API proposal: [Orca PR #38282](https://github.com/stablyai/orca/pull/38282).
+
 ## Requirements and permissions
 
 - Linux with Omarchy and Python 3.11+ available as `python3`.
@@ -30,8 +45,9 @@ the opt-out. No manual converter command is needed during normal use.
   not pre-rendered into a closed-app snapshot by an Omarchy hook.
 - Font/background controls record the requested defaults but are explicitly
   unavailable; no font, wallpaper, size, layout, or opacity setting is changed.
-- The host reports publication, not acknowledgement from every existing terminal
-  or renderer. Live rendering still needs isolated Electron validation.
+- The host reports publication, not acknowledgement from every renderer. Isolated
+  Linux tests verify app/editor and existing-terminal repaint across three themes;
+  other platforms, remote hosts, and every restart scenario remain unverified.
 - Automatic reconciliation of manual Orca overrides is not implemented yet.
 - Complete durable hook ownership/cleanup and frozen resources on uninstall remain
   future host work; do not treat this preview as release-ready.

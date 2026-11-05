@@ -17,7 +17,7 @@ def main(argv: list[str] | None = None) -> int:
         Path("LICENSE"): ROOT / "LICENSE",
         Path("README.md"): ROOT / "plugin/README.md",
     }
-    for directory, pattern in (("plugin", "*.mjs"), ("plugin", "convert.py"), ("src/orcarchy", "*.py")):
+    for directory, pattern in (("plugin", "*.mjs"), ("plugin", "convert.py"), ("src/orcarchy", "*.py"), ("images", "*.png")):
         for source in sorted((ROOT / directory).glob(pattern)):
             files[source.relative_to(ROOT)] = source
     try:

@@ -18,6 +18,9 @@ class PluginPackagingTests(unittest.TestCase):
             self.assertTrue((output / manifest["main"]).is_file())
             self.assertTrue((output / "src/orcarchy/palette.py").is_file())
             self.assertTrue((output / "plugin/convert.py").is_file())
+            for image in [manifest["cover"], *manifest["screenshots"]]:
+                self.assertEqual((output / image["path"]).read_bytes(), (ROOT / image["path"]).read_bytes())
+            self.assertIn("images/tokyo-night-editor.png", (output / "README.md").read_text())
             self.assertFalse((output / "build").exists())
             self.assertFalse((output / ".git").exists())
             self.assertFalse((output / "tests").exists())

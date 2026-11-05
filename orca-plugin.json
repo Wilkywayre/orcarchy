@@ -11,6 +11,18 @@
   "license": "MIT",
   "engines": { "orca": ">=1.4.249" },
   "pluginApi": 1,
+  "cover": {
+    "path": "images/tokyo-night-editor.png",
+    "alt": "Orcarchy following Tokyo Night in Orca's application and editor"
+  },
+  "screenshots": [
+    { "path": "images/tokyo-night-editor.png", "alt": "Tokyo Night application and editor", "caption": "Tokyo Night — app and editor, custom host on Linux" },
+    { "path": "images/tokyo-night-terminal.png", "alt": "Tokyo Night terminal with existing ANSI-colored output", "caption": "Tokyo Night — the terminal stays open during switches" },
+    { "path": "images/gruvbox-editor.png", "alt": "Gruvbox application and editor", "caption": "Gruvbox — live dark-to-dark update without restart" },
+    { "path": "images/gruvbox-terminal.png", "alt": "The same terminal repainted with Gruvbox colors", "caption": "Gruvbox — existing terminal output repaints" },
+    { "path": "images/catppuccin-latte-editor.png", "alt": "Catppuccin Latte application and editor", "caption": "Catppuccin Latte — live dark-to-light update" },
+    { "path": "images/catppuccin-latte-terminal.png", "alt": "The same terminal repainted with Catppuccin Latte colors", "caption": "Catppuccin Latte — same terminal, no restart" }
+  ],
   "main": "plugin/main.mjs",
   "capabilities": [
     { "kind": "appearance:write" },

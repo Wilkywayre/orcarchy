@@ -21,7 +21,8 @@ changes while open. It supports master/Colors controls and leave-as-is disconnec
 The host extension publishes owned app/editor/terminal palettes, persists generated
 resources separately from plugin code, and protects against stale, cancelled, or
 revoked writes. Its source tests, full typecheck, CLI validator, and Electron/Vite
-asset build pass. Actual live rendering in an isolated app is still unverified.
+asset build pass. Isolated Linux testing verified live app/editor and existing-
+terminal repaint across Tokyo Night, Gruvbox, and Catppuccin Latte without restart.
 
 **Not implemented yet:** Omarchy OS hooks/closed-app snapshots, font/background
 application, automatic manual-override reconciliation, and complete uninstall
@@ -31,6 +32,20 @@ the preview. No user hooks or installed Orca settings have been changed.
 See [source extension and validation](upstream/README.md) and the
 [compatibility evidence](docs/compatibility.md). The experimental 1.4.249 schema
 floor is not a claim of support in any stock release.
+
+## Live preview
+
+| Tokyo Night | Gruvbox | Catppuccin Latte |
+| --- | --- | --- |
+| ![Tokyo Night application and editor](images/tokyo-night-editor.png) | ![Gruvbox application and editor](images/gruvbox-editor.png) | ![Catppuccin Latte application and editor](images/catppuccin-latte-editor.png) |
+| ![Tokyo Night existing terminal](images/tokyo-night-terminal.png) | ![Gruvbox same terminal](images/gruvbox-terminal.png) | ![Catppuccin Latte same terminal](images/catppuccin-latte-terminal.png) |
+
+Actual custom-host Electron captures, not mockups. The same terminal's existing
+output repainted across all three palettes. The test used a disposable profile
+and HOME, atomically replacing its theme symlink; it did not change the user's
+desktop theme. [Evidence and limits](https://github.com/Wilkywayre/orca/blob/0d526ee78ea87fb34d709bca7a9e0418d2d64ee3/README.md).
+
+Proposed host API: [Orca PR #38282](https://github.com/stablyai/orca/pull/38282).
 
 ## Package the actual plugin preview
 
@@ -98,14 +113,16 @@ python -m venv .venv
 ## Safety and limitations
 
 - Reads color data only; does not execute theme scripts.
-- Never modifies packaged Omarchy files, Orca settings, or user hooks.
+- Never edits packaged Omarchy files, private Orca settings files, or user hooks.
+  The approved worker applies appearance through the custom host's public API.
 - Does not restart Orca or interrupt agent sessions.
 - Accepts opaque `#RRGGBB` palette colors; unrelated metadata is ignored.
 - Rejects unreadable background/text pairs. Adjusts generated text and syntax
   colors to readable fallbacks where necessary; terminal ANSI colors stay intact.
 - Missing optional colors fall back to supplied palette colors, not another theme.
-- Generates one app theme in the source palette's mode. Automatic switching
-  between Orca's light/dark slots needs compatibility testing.
+- The converter generates one app theme in the source palette's mode. The worker
+  selects light/dark slots through the custom host; isolated Linux switching is
+  verified, but other platforms and every restart scenario are not.
 - Orca copies selected terminal palettes into settings. Regenerating files alone
   is **not** a guarantee of live terminal updates.
 - Validates input before writing. An I/O failure can leave an incomplete **new**
