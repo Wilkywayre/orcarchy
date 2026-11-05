@@ -25,7 +25,8 @@ of the user's installed application.
 - Regenerated public schemas, references, typings, and authoring skill references.
 
 The result says **published**, not “every renderer has painted.” Isolated live
-Electron verification remains required. Fonts, backgrounds, external-hook lifecycle,
+Electron verification on Linux has now been captured for three themes (see
+Validation completed). Fonts, backgrounds, external-hook lifecycle,
 and appearance-change subscriptions for manual override ownership are not added
 by this initial patch.
 
@@ -87,20 +88,23 @@ checkout/build outputs.
 
 ## Validation completed
 
-- 61 targeted source tests across appearance, admission/revocation, registry,
-  reconciliation, manifest, and generated author typings.
+- 88 targeted source tests across appearance, admission/revocation, registry,
+  reconciliation, manifest, generated author typings, command replacements,
+  and custom editor contributions.
 - Full `pnpm run tc` (all configured typecheck projects).
 - Scoped Oxlint and Oxfmt checks for changed source modules.
 - Custom CLI build and plugin artifact validation; approval is correctly required.
 - Electron/Vite main, preload, and renderer asset build; preload/boot graph checks.
-- Patch applies cleanly to reconstructed base files and reproduces all 27 changed
+- Patch applies cleanly to reconstructed base files and reproduces all 29 changed
   files byte-for-byte.
 - 32 project tests: 21 Node tests and 11 Python tests.
-
-Full upstream test/lint/release gates and a live isolated renderer/terminal test
-have **not** been completed. The build emits bundler chunk/dynamic-import warnings;
-it exits successfully. No Orca fork, upstream issue/comment, tag, commit, or PR
-was published as part of this implementation.
+- Isolated live Electron verification on Linux: approved worker applied Tokyo
+  Night, Gruvbox, and Catppuccin Latte with app/editor and existing-terminal
+  repaint and no restart. See the evidence branch linked from
+  [Orca PR #38282](https://github.com/stablyai/orca/pull/38282).
+- Upstream discussion: [Orca issue #38277](https://github.com/stablyai/orca/issues/38277)
+  and draft [PR #38282](https://github.com/stablyai/orca/pull/38282) from the
+  Wilkywayre fork. No upstream merge has occurred.
 
 ## Refreshing the exported patch
 

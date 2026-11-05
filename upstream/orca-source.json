@@ -4,7 +4,7 @@
   "baseCommit": "edf53846689b6ee9fd356f58f4f432491b456eaa",
   "branch": "orcarchy/appearance-provider",
   "patch": "orca-appearance-provider.patch",
-  "patchSha256": "2837b5bc60abe084f9cdf5bacd05d164d88d046f96c9c38bee3693c7be02fae1",
+  "patchSha256": "dc8a9f592db9d3f423037bbaa5780a0f75e663b069e915575eff9264db94bdc6",
   "files": [
     "docs/reference/plugin-catalog.md",
     "docs/reference/plugin-host-api.md",
@@ -30,6 +30,8 @@
     "src/main/startup/main-process-plugins.ts",
     "src/shared/plugins/capabilities/plugin-capabilities.ts",
     "src/shared/plugins/capabilities/plugin-capability-reach.ts",
+    "src/shared/plugins/contributions/plugin-command-replaces.test.ts",
+    "src/shared/plugins/contributions/plugin-custom-editor-contribution.test.ts",
     "src/shared/plugins/installation/plugin-host-version.ts",
     "src/shared/plugins/workers/plugin-host-api-appearance.ts",
     "src/shared/plugins/workers/plugin-host-api-worker-actions.ts"
