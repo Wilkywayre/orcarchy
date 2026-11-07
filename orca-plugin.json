@@ -4,7 +4,7 @@
   "execution": "trusted-worker",
   "id": "orcarchy",
   "name": "Orcarchy — Omarchy Sync (development preview)",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Live Omarchy color synchronization. Requires Orca 1.4.251+ (stock includes the appearance provider). Python 3.11+ required.",
   "author": { "name": "wilkywayre" },
   "repository": "https://github.com/wilkywayre/orcarchy",

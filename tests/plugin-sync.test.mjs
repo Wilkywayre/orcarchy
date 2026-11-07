@@ -82,3 +82,22 @@ test('the worker bridge converts a real light palette without installation or ge
   assert.equal(JSON.parse(result.app).base, 'light');
   assert.equal(JSON.parse(result.terminal).terminal.background, '#fafafa');
 });
+
+test('the packaged bridge writes no bytecode next to the shipped sources', async (t) => {
+  const { mkdtemp, rm, readdir, cp } = await import('node:fs/promises');
+  const { tmpdir } = await import('node:os');
+  const { join } = await import('node:path');
+  const { pathToFileURL } = await import('node:url');
+  const root = await mkdtemp(join(tmpdir(), 'orcarchy-bytecode-'));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const here = fileURLToPath(new URL('..', import.meta.url));
+  const noBytecode = (src, dest) => !dest.includes('__pycache__');
+  await cp(join(here, 'plugin'), join(root, 'plugin'), { recursive: true, filter: noBytecode });
+  await cp(join(here, 'src'), join(root, 'src'), { recursive: true, filter: noBytecode });
+  const { readPalette: packaged } = await import(pathToFileURL(join(root, 'plugin/read-palette.mjs')).href);
+  const palette = fileURLToPath(new URL('./fixtures/light.toml', import.meta.url));
+  const result = await packaged(palette);
+  assert.equal(JSON.parse(result.app).base, 'light');
+  const entries = await readdir(join(root, 'src'), { recursive: true });
+  assert.deepEqual(entries.filter((entry) => entry.includes('__pycache__')), []);
+});
