@@ -8,15 +8,18 @@ backgrounds through owned OS hooks and supported Orca interfaces, including on
 startup. Feature toggles preserve user choices; sizes, spacing, and opacity stay
 untouched.
 
-**[Experimental source extension implemented](upstream/README.md):** the local
-Orca source branch now exposes a permissioned appearance-provider API, and this
-repository contains a real worker plugin using it. Stock Orca still needs that API.
+**[Appearance provider merged upstream](upstream/README.md):** the permissioned
+appearance-provider API merged as
+[stablyai/orca#38524](https://github.com/stablyai/orca/pull/38524) and first
+shipped in stock Orca 1.4.251. This repository contains the worker plugin using
+it. Orca 1.4.251+ is required; older stock releases lack the API.
 
 ## Status
 
-**Development preview, custom host required.** The color worker starts through
-Orca's resident status-bar mechanism, rereads Omarchy on startup, and watches theme
-changes while open. It supports master/Colors controls and leave-as-is disconnect.
+**Development preview, stock Orca 1.4.251+ supported.** The color worker starts
+through Orca's resident status-bar mechanism, rereads Omarchy on startup, and
+watches theme changes while open. It supports master/Colors controls and
+leave-as-is disconnect.
 
 The host extension publishes owned app/editor/terminal palettes, persists generated
 resources separately from plugin code, and protects against stale, cancelled, or
@@ -30,8 +33,8 @@ resource lifecycle. Their requested settings are explicitly marked unavailable i
 the preview. No user hooks or installed Orca settings have been changed.
 
 See [source extension and validation](upstream/README.md) and the
-[compatibility evidence](docs/compatibility.md). The experimental 1.4.249 schema
-floor is not a claim of support in any stock release.
+[compatibility evidence](docs/compatibility.md). The 1.4.251 engine floor matches
+the first stock release shipping the appearance provider.
 
 ## Live preview
 
@@ -40,12 +43,12 @@ floor is not a claim of support in any stock release.
 | ![Tokyo Night application and editor](images/tokyo-night-editor.png) | ![Gruvbox application and editor](images/gruvbox-editor.png) | ![Catppuccin Latte application and editor](images/catppuccin-latte-editor.png) |
 | ![Tokyo Night existing terminal](images/tokyo-night-terminal.png) | ![Gruvbox same terminal](images/gruvbox-terminal.png) | ![Catppuccin Latte same terminal](images/catppuccin-latte-terminal.png) |
 
-Actual custom-host Electron captures, not mockups. The same terminal's existing
-output repainted across all three palettes. The test used a disposable profile
-and HOME, atomically replacing its theme symlink; it did not change the user's
-desktop theme. [Evidence and limits](https://github.com/Wilkywayre/orca/blob/0d526ee78ea87fb34d709bca7a9e0418d2d64ee3/README.md).
+Actual stock-Orca Electron captures (1.4.251 API), not mockups. The same terminal's
+existing output repainted across all three palettes. The test used a disposable
+profile and HOME, atomically replacing its theme symlink; it did not change the
+user's desktop theme. [Evidence and limits](https://github.com/Wilkywayre/orca/blob/0d526ee78ea87fb34d709bca7a9e0418d2d64ee3/README.md).
 
-Proposed host API: [Orca PR #38282](https://github.com/stablyai/orca/pull/38282).
+Host API: merged as [Orca PR #38524](https://github.com/stablyai/orca/pull/38524), first shipped in stock 1.4.251.
 
 ## Package the actual plugin preview
 
@@ -54,10 +57,10 @@ python tools/package-plugin.py --output dist/orcarchy
 ```
 
 The output directory must be new. This packages only the worker, converter runtime,
-manifest, README, and license—not the nested source checkout. Normal plugin
-operation does not require converter commands or manually generated theme files.
-Do not load the preview into your normal profile; it requires the custom host and
-an explicitly approved isolated development test.
+manifest, README, license, and screenshots—not the nested source checkout. Normal
+plugin operation does not require converter commands or manually generated theme
+files. On stock Orca 1.4.251+, register the packaged directory as a development
+folder and approve it through the normal plugin review flow.
 
 ## Compatibility investigation
 

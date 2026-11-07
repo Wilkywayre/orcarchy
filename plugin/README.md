@@ -2,9 +2,10 @@
 
 Automatically follows Omarchy colors when approved in a compatible Orca host.
 
-**Requires the experimental Orcarchy appearance-provider source extension. It
-does not work in stock Orca.** The experimental schema uses a 1.4.249 minimum;
-that number is not a claim that a stock 1.4.249 release includes this API.
+**Requires Orca 1.4.251 or newer.** The permissioned appearance provider
+(`appearance.read` / `appearance.apply`) merged upstream in
+[stablyai/orca#38524](https://github.com/stablyai/orca/pull/38524) and first
+shipped in stock Orca 1.4.251. Older stock releases do not have this API.
 
 ## Live preview
 
@@ -14,17 +15,17 @@ that number is not a claim that a stock 1.4.249 release includes this API.
 | --- | --- |
 | ![Gruvbox existing terminal](https://raw.githubusercontent.com/Wilkywayre/orcarchy/main/images/gruvbox-terminal.png) | ![Catppuccin Latte same terminal](https://raw.githubusercontent.com/Wilkywayre/orcarchy/main/images/catppuccin-latte-terminal.png) |
 
-Real custom-host Electron captures from an isolated Linux profile. The same app,
-editor file, and terminal survived all three palette changes without restart.
-The test replaced a theme symlink under a disposable HOME, not the user's desktop
-theme. [Method and limits](https://github.com/Wilkywayre/orca/blob/0d526ee78ea87fb34d709bca7a9e0418d2d64ee3/README.md).
+Real stock-Orca Electron captures from an isolated Linux profile on Orca 1.4.251.
+The same app, editor file, and terminal survived all three palette changes
+without restart. The test replaced a theme symlink under a disposable HOME, not
+the user's desktop theme. [Method and limits](https://github.com/Wilkywayre/orca/blob/0d526ee78ea87fb34d709bca7a9e0418d2d64ee3/README.md).
 
-Host API proposal: [Orca PR #38282](https://github.com/stablyai/orca/pull/38282).
+Host API: merged as [Orca PR #38524](https://github.com/stablyai/orca/pull/38524), first shipped in stock 1.4.251.
 
 ## Requirements and permissions
 
 - Linux with Omarchy and Python 3.11+ available as `python3`.
-- A custom source-built Orca exposing `appearance.read` and `appearance.apply`.
+- Orca 1.4.251+ (stock release with the appearance provider).
 - Approve the trusted worker, plugin-private settings, and appearance-write access
   through Orca's normal review flow. The worker has full machine access; review it.
 
