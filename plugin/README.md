@@ -1,9 +1,9 @@
-# Orcarchy development preview
+# Orcarchy
 
-Automatically follows Omarchy colors when approved in a compatible Orca host.
+Automatically follows Omarchy colors when approved in Orca 1.4.251+.
 
-**Requires Orca 1.4.251 or newer.** The permissioned appearance provider
-(`appearance.read` / `appearance.apply`) merged upstream in
+The permissioned appearance provider (`appearance.read` / `appearance.apply`)
+merged upstream in
 [stablyai/orca#38524](https://github.com/stablyai/orca/pull/38524) and first
 shipped in stock Orca 1.4.251. Older stock releases do not have this API.
 
@@ -40,21 +40,13 @@ writes. “Disconnect” persists the master opt-out and keeps the current appea
 turn Automatic synchronization back on intentionally to resume. “Sync now” respects
 the opt-out. No manual converter command is needed during normal use.
 
-## Explicit preview limitations
+## What's next
 
-- No OS hooks are installed yet. Changes while closed are picked up on startup,
-  not pre-rendered into a closed-app snapshot by an Omarchy hook.
-- Font/background controls record the requested defaults but are explicitly
-  unavailable; no font, wallpaper, size, layout, or opacity setting is changed.
-- The host reports publication, not acknowledgement from every renderer. Isolated
-  Linux tests verify app/editor and existing-terminal repaint across three themes;
-  other platforms, remote hosts, and every restart scenario remain unverified.
-- Automatic reconciliation of manual Orca overrides is not implemented yet.
-- Complete durable hook ownership/cleanup and frozen resources on uninstall remain
-  future host work; do not treat this preview as release-ready.
+- OS hooks for changes while Orca is closed (currently picked up on startup).
+- Font family sync, once family-only host support lands. The Fonts toggle
+  records your preference today but changes nothing yet.
+- Background/wallpaper sync. The Backgrounds toggle records your preference
+  today but changes nothing yet.
+- Automatic reconciliation of manual Orca overrides.
 - A watcher error is logged; Sync now retries watcher registration. No hidden
   background service or automatic application restart is used.
-
-Do not load this preview into a normal Orca profile to bypass these limitations.
-Use an explicitly approved, isolated development profile once the host build has
-passed the required validation.

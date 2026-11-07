@@ -3,9 +3,9 @@
   "manifestVersion": 2,
   "execution": "trusted-worker",
   "id": "orcarchy",
-  "name": "Orcarchy — Omarchy Sync (development preview)",
-  "version": "0.2.2",
-  "description": "Live Omarchy color synchronization. Requires Orca 1.4.251+ (stock includes the appearance provider). Python 3.11+ required.",
+  "name": "Orcarchy — Omarchy Sync",
+  "version": "0.3.0",
+  "description": "Live Omarchy color synchronization for Orca. Requires Orca 1.4.251+. Python 3.11+ required.",
   "author": { "name": "wilkywayre", "url": "https://github.com/Wilkywayre" },
   "repository": "https://github.com/wilkywayre/orcarchy",
   "license": "MIT",
@@ -16,7 +16,7 @@
     "alt": "Orcarchy following Tokyo Night in Orca's application and editor"
   },
   "screenshots": [
-    { "path": "images/tokyo-night-editor.png", "alt": "Tokyo Night application and editor", "caption": "Tokyo Night — app and editor, custom host on Linux" },
+    { "path": "images/tokyo-night-editor.png", "alt": "Tokyo Night application and editor", "caption": "Tokyo Night — app and editor on stock Orca" },
     { "path": "images/tokyo-night-terminal.png", "alt": "Tokyo Night terminal with existing ANSI-colored output", "caption": "Tokyo Night — the terminal stays open during switches" },
     { "path": "images/gruvbox-editor.png", "alt": "Gruvbox application and editor", "caption": "Gruvbox — live dark-to-dark update without restart" },
     { "path": "images/gruvbox-terminal.png", "alt": "The same terminal repainted with Gruvbox colors", "caption": "Gruvbox — existing terminal output repaints" },
@@ -38,9 +38,9 @@
     ],
     "settings": [
       { "key": "enabled", "title": "Automatic synchronization", "description": "Follow Omarchy on startup and while running. Disable to leave the current appearance unchanged.", "type": "boolean", "default": true },
-      { "key": "colors", "title": "Colors", "description": "Synchronize application, editor, and terminal colors through the experimental host API.", "type": "boolean", "default": true },
-      { "key": "fonts", "title": "Fonts (not available in this preview)", "description": "Requested by default; no font settings are changed until family-only host support is implemented.", "type": "boolean", "default": true },
-      { "key": "backgrounds", "title": "Backgrounds (not available in this preview)", "description": "Requested by default; no background or opacity settings are changed in this preview.", "type": "boolean", "default": true }
+      { "key": "colors", "title": "Colors", "description": "Synchronize application, editor, and terminal colors through the appearance provider API.", "type": "boolean", "default": true },
+      { "key": "fonts", "title": "Fonts (coming soon)", "description": "Requested by default; no font settings are changed until family-only host support is implemented.", "type": "boolean", "default": true },
+      { "key": "backgrounds", "title": "Backgrounds (coming soon)", "description": "Requested by default; no background or opacity settings are changed yet.", "type": "boolean", "default": true }
     ]
   }
 }

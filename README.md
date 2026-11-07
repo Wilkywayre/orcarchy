@@ -16,7 +16,7 @@ it. Orca 1.4.251+ is required; older stock releases lack the API.
 
 ## Status
 
-**Development preview, stock Orca 1.4.251+ supported.** The color worker starts
+**Launched: color sync on stock Orca 1.4.251+.** The color worker starts
 through Orca's resident status-bar mechanism, rereads Omarchy on startup, and
 watches theme changes while open. It supports master/Colors controls and
 leave-as-is disconnect.
@@ -27,10 +27,10 @@ revoked writes. Its source tests, full typecheck, CLI validator, and Electron/Vi
 asset build pass. Isolated Linux testing verified live app/editor and existing-
 terminal repaint across Tokyo Night, Gruvbox, and Catppuccin Latte without restart.
 
-**Not implemented yet:** Omarchy OS hooks/closed-app snapshots, font/background
+**On the roadmap:** Omarchy OS hooks/closed-app snapshots, font/background
 application, automatic manual-override reconciliation, and complete uninstall
-resource lifecycle. Their requested settings are explicitly marked unavailable in
-the preview. No user hooks or installed Orca settings have been changed.
+resource lifecycle. The Fonts and Backgrounds settings record your preference
+but change nothing yet.
 
 See [source extension and validation](upstream/README.md) and the
 [compatibility evidence](docs/compatibility.md). The 1.4.251 engine floor matches
@@ -50,7 +50,7 @@ user's desktop theme. [Evidence and limits](https://github.com/Wilkywayre/orca/b
 
 Host API: merged as [Orca PR #38524](https://github.com/stablyai/orca/pull/38524), first shipped in stock 1.4.251.
 
-## Package the actual plugin preview
+## Package the plugin
 
 ```bash
 python tools/package-plugin.py --output dist/orcarchy

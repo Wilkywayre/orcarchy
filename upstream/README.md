@@ -1,7 +1,9 @@
-# Experimental Orca appearance-provider extension
+# Orca appearance-provider extension (merged upstream)
 
-This is a **local source extension**, not a merged upstream API or a patched copy
-of the user's installed application.
+This was a **local source extension**, now merged upstream as
+[stablyai/orca#38524](https://github.com/stablyai/orca/pull/38524) and shipped
+in stock Orca 1.4.251. This directory retains the original patch and build notes
+for the record.
 
 - Base: `edf53846689b6ee9fd356f58f4f432491b456eaa` from `stablyai/orca`.
 - Local checkout: `build/orca-source`, branch `orcarchy/appearance-provider`.
