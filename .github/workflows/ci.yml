@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Python tests
+        run: PYTHONPATH=src python -m unittest discover -s tests -v
+
+      - name: Node worker tests
+        run: node --test tests/probe-orca.test.cjs tests/appearance-provider.test.cjs tests/plugin-sync.test.mjs
+
+      - name: Package plugin
+        run: python tools/package-plugin.py --output /tmp/orcarchy-pkg
+
+      - name: Validate package
+        run: python tools/validate-package.py /tmp/orcarchy-pkg
+
+      - name: Check whitespace
+        run: git diff --check

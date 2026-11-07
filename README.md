@@ -117,14 +117,14 @@ python -m venv .venv
 
 - Reads color data only; does not execute theme scripts.
 - Never edits packaged Omarchy files, private Orca settings files, or user hooks.
-  The approved worker applies appearance through the custom host's public API.
+  The approved worker applies appearance through the stock appearance provider API.
 - Does not restart Orca or interrupt agent sessions.
 - Accepts opaque `#RRGGBB` palette colors; unrelated metadata is ignored.
 - Rejects unreadable background/text pairs. Adjusts generated text and syntax
   colors to readable fallbacks where necessary; terminal ANSI colors stay intact.
 - Missing optional colors fall back to supplied palette colors, not another theme.
 - The converter generates one app theme in the source palette's mode. The worker
-  selects light/dark slots through the custom host; isolated Linux switching is
+  selects light/dark slots through the stock provider; isolated Linux switching is
   verified, but other platforms and every restart scenario are not.
 - Orca copies selected terminal palettes into settings. Regenerating files alone
   is **not** a guarantee of live terminal updates.
@@ -135,7 +135,7 @@ python -m venv .venv
 
 ```text
 src/orcarchy/       Palette reader, pure converters, and CLI
-plugin/            Actual worker and private converter bridge (custom-host preview)
+plugin/            Worker and private converter bridge (stock Orca 1.4.251+)
 tests/fixtures/    Synthetic light and dark palettes
 tests/             Standard-library unit and CLI tests
 tools/             Read-only installed Orca contract inventory

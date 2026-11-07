@@ -1,0 +1,74 @@
+name: Release
+
+# "Deploy" for this repo means publishing a version tag: the community
+# directory lists the newest vX.Y.Z tag, pinned to its commit. Validation runs
+# first and the run stops before anything is published when it fails.
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to release (must match orca-plugin.json)"
+        required: true
+      notes:
+        description: "Release notes"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-tags: true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Python tests
+        run: PYTHONPATH=src python -m unittest discover -s tests -v
+
+      - name: Node worker tests
+        run: node --test tests/probe-orca.test.cjs tests/appearance-provider.test.cjs tests/plugin-sync.test.mjs
+
+      - name: Package plugin
+        run: python tools/package-plugin.py --output /tmp/orcarchy-pkg
+
+      - name: Validate package against release version
+        run: python tools/validate-package.py /tmp/orcarchy-pkg --version "${{ inputs.version }}"
+
+      - name: Refuse existing tag
+        run: |
+          if git rev-parse "v${{ inputs.version }}" >/dev/null 2>&1; then
+            echo "tag v${{ inputs.version }} already exists" >&2
+            exit 1
+          fi
+
+      - name: Build release asset
+        run: python -c "import shutil; shutil.make_archive('/tmp/orcarchy-${{ inputs.version }}', 'zip', root_dir='/tmp', base_dir='orcarchy-pkg')"
+
+      - name: Create tag
+        run: |
+          git tag "v${{ inputs.version }}"
+          git push origin "v${{ inputs.version }}"
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ inputs.version }}
+          name: v${{ inputs.version }}
+          body: ${{ inputs.notes }}
+          files: /tmp/orcarchy-${{ inputs.version }}.zip

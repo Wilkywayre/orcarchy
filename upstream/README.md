@@ -34,10 +34,9 @@ by this initial patch.
 
 ## Version boundary
 
-The experimental schema floor is **1.4.249**. It is a provisional local extension
-gate, not a promise that stock Orca 1.4.249 includes these methods. Development
-hosts use Orca's existing schema-aware host version calculation. The worker also
-checks actual facade method availability. Do not publish this as stock support.
+The extension was developed against a provisional **1.4.249** schema floor.
+It merged upstream as [#38524](https://github.com/stablyai/orca/pull/38524) and
+first shipped in **stock Orca 1.4.251**, which is now the plugin's engine floor.
 
 ## Reproduce in a separate source checkout
 
@@ -104,9 +103,10 @@ checkout/build outputs.
   Night, Gruvbox, and Catppuccin Latte with app/editor and existing-terminal
   repaint and no restart. See the evidence branch linked from
   [Orca PR #38282](https://github.com/stablyai/orca/pull/38282).
-- Upstream discussion: [Orca issue #38277](https://github.com/stablyai/orca/issues/38277)
-  and draft [PR #38282](https://github.com/stablyai/orca/pull/38282) from the
-  Wilkywayre fork. No upstream merge has occurred.
+- Upstream discussion: [Orca issue #38277](https://github.com/stablyai/orca/issues/38277),
+  proposal [PR #38282](https://github.com/stablyai/orca/pull/38282), merged via
+  [#38524](https://github.com/stablyai/orca/pull/38524) and shipped in stock
+  Orca 1.4.251.
 
 ## Refreshing the exported patch
 
